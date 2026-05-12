@@ -785,6 +785,14 @@ rule-providers:
     <<: *rp_ipcidr
     url: https://cdn.jsdelivr.net/gh/legiz-ru/mihomo-rule-sets@main/ru-bundle/rknasnblock.mrs
     path: ./ru-bundle/rknasnblock.mrs
+  geosite-ru:
+    <<: *rp_domain
+    url: https://raw.githubusercontent.com/Davoyan/mihomo-rule-sets/main/rules/category-ru.mrs
+    path: ./rule-sets/geosite-ru.mrs
+  geoip-ru:
+    <<: *rp_ipcidr
+    url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geoip/ru.mrs
+    path: ./geoip-ru.mrs
   apps_ipcheck:
     type: inline
     behavior: classical
