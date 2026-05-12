@@ -1,5 +1,4 @@
-remnawave:
-  includeHiddenHosts: false
+
 
 x-anchors:
   reserved_ips: &reserved_ips
