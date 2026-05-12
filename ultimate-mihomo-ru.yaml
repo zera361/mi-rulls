@@ -684,6 +684,8 @@ proxy-groups:
     proxies:
       - ⚡️ Fastest
       # LEAVE THIS LINE!
+    use:
+      - subscription
 
   - name: ▶️ YouTube
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/YouTube.png
