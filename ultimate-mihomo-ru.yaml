@@ -689,7 +689,7 @@ proxy-groups:
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/YouTube.png
     type: select
     proxies:
-      - 🌍 VPN
+      - 🇷🇺 Rus-2
     use:
       - subscription
 
