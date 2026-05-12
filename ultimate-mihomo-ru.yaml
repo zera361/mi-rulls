@@ -640,6 +640,17 @@ dns:
     rule-set:ads-all:
       - rcode://refused
     "rule-set:apps_ipcheck,youtube,telegram_domains,discord_domains,ru-bundle,whatsapp_domains": *dns_proxy
+proxy-providers:
+  subscription:
+    type: inline
+    path: ./proxy_providers/subscription.yaml
+    health-check:
+      enable: true
+      lazy: true
+      interval: 600
+      url: https://captive.apple.com/generate_204
+    payload:
+$payload$
 
 proxies: # LEAVE THIS LINE!
 
