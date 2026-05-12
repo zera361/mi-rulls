@@ -676,15 +676,6 @@ proxy-groups:
       # LEAVE THIS LINE!
 
   - name: ⚡️ Fastest
-    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
-    type: url-test
-    lazy: true
-    tolerance: 150
-    
-    url: https://captive.apple.com/generate_204
-    interval: 300
-    proxies:
-  - name: ⚡️ Fastest
     type: smart
     exclude-filter: 🇷🇺 Rus-2
     # uselightgbm: use LightGBM model predict weight
@@ -697,11 +688,11 @@ proxy-groups:
     # sample-rate: data acquisition rate, desirable values are 0-1,  the default is 1
     sample-rate: 1
     proxies:
-     # - 🇩🇪 Ger-1
-     # - 🇸🇪 Swed
-     # - 🇱🇻 Latv-v
-     # - 🇩🇪 Ger1-Xhttp
-     # - 🏴‍☠ LTE NEW
+      - 🇩🇪 Ger-1
+      - 🇸🇪 Swed
+      - 🇱🇻 Latv-v
+      - 🇩🇪 Ger1-Xhttp
+      - 🏴‍☠ LTE NEW
 
   - name: ♻️ БезVPN
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Direct.png
