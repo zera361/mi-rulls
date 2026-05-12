@@ -689,8 +689,8 @@ proxy-groups:
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/YouTube.png
     type: select
     proxies:
-      - 🌍 VPN
-      # LEAVE THIS LINE!
+    use:
+      - subscription
 
   - name: ⚡️ Fastest
     type: smart
