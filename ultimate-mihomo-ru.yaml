@@ -679,7 +679,11 @@ proxy-groups:
     url: https://captive.apple.com/generate_204
     interval: 300
     proxies:
-      # LEAVE THIS LINE!
+      -🇩🇪 Ger-1
+      -🇸🇪 Swed
+      -🇱🇻 Latv-v
+      -🇩🇪 Ger1-Xhttp
+      -🏴‍☠ LTE NEW
 
   - name: ♻️ БезVPN
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Direct.png
