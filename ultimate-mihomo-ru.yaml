@@ -821,6 +821,6 @@ rules:
   - RULE-SET,cloudflare,🌍 VPN
   - RULE-SET,rknasnblock,🌍 VPN
   # Страховочный пояс для российских ресурсов (чтобы не гонять трафик зря)
-  - RULE-SET,geosite-ru,♻️ БезVPN
-  - RULE-SET,geoip-ru,♻️ БезVPN
+ # - RULE-SET,geosite-ru,♻️ БезVPN
+ # - RULE-SET,geoip-ru,♻️ БезVPN
   - MATCH,🌍 VPN # <-- ВОТ ЭТО ВАЖНОЕ ИЗМЕНЕНИЕ
