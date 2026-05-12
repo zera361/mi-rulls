@@ -64,7 +64,7 @@ unified-delay: true
 profile:
   store-selected: true
   store-fake-ip: true
-
+  smart-collector-size: 100
 sniffer:
   enable: true
   force-dns-mapping: true
@@ -82,7 +82,24 @@ sniffer:
     QUIC:
       ports:
         - 443
-
+  skip-dst-address:
+    - 0.0.0.0/8
+    - 10.0.0.0/8
+    - 100.64.0.0/10
+    - 127.0.0.0/8
+    - 169.254.0.0/16
+    - 172.16.0.0/12
+    - 192.0.0.0/24
+    - 192.0.2.0/24
+    - 192.88.99.0/24
+    - 192.168.0.0/16
+    - 198.51.100.0/24
+    - 203.0.113.0/24
+    - 224.0.0.0/3
+    - ::/127
+    - fc00::/7
+    - fe80::/10
+    - ff00::/8
 tun:
   exclude-package:
     [
@@ -687,12 +704,9 @@ proxy-groups:
     strategy: sticky-sessions
     # sample-rate: data acquisition rate, desirable values are 0-1,  the default is 1
     sample-rate: 1
-    proxies:
-      - 🇩🇪 Ger-1
-      - 🇸🇪 Swed
-      - 🇱🇻 Latv-v
-      - 🇩🇪 Ger1-Xhttp
-      - 🏴‍☠ LTE NEW
+    use:
+      - subscription
+
 
   - name: ♻️ БезVPN
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Direct.png
