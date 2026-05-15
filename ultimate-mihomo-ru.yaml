@@ -52,6 +52,9 @@ x-anchors:
     format: mrs
     proxy: 🌍 VPN
 
+mixed-port: 7890
+allow-lan: true
+bind-address: "*"
 tcp-concurrent: true
 enable-process: true
 find-process-mode: always
@@ -675,6 +678,11 @@ proxy-providers:
 $payload$
 
 proxies: # LEAVE THIS LINE!
+  - name: "♻️ БезVPN"
+    type: direct
+    udp: true
+  - name: DNS-OUT
+    type: dns
 
 proxy-groups:
   - name: 🌍 VPN
@@ -710,15 +718,31 @@ proxy-groups:
     use:
       - subscription
 
+  - name: 💬 Discord
+    icon: https://cdn.jsdelivr.net/gh/remnawave/templates@main/icons/Discord.png
+    type: select
+    proxies:
+      - 🌍 VPN
+    use:
+      - subscription
 
-  - name: ♻️ БезVPN
+  - name: ➤ Telegram
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
+    type: select
+    proxies:
+      - 🌍 VPN
+      - ♻️ БезVPN
+    use:
+      - subscription
+
+  - name: RU сайты
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Direct.png
     remnawave:
       include-proxies: false
     type: select
     hidden: true
     proxies:
-      - DIRECT
+      - ♻️ БезVPN
 
 rule-providers:
   geosite-private:
@@ -773,6 +797,48 @@ rule-providers:
     <<: *rp_ipcidr
     url: https://cdn.jsdelivr.net/gh/legiz-ru/mihomo-rule-sets@main/other/discord-voice-ip-list.mrs
     path: ./rule-sets/discord_voiceips.mrs
+  discord_vc:
+    type: inline
+    payload:
+      - AND,((IP-CIDR,138.128.136.0/21),(NETWORK,udp),(DST-PORT,50000-50100))
+      - AND,((IP-CIDR,162.158.0.0/15),(NETWORK,udp),(DST-PORT,50000-50100))
+      - AND,((IP-CIDR,172.64.0.0/13),(NETWORK,udp),(DST-PORT,50000-50100))
+      - AND,((IP-CIDR,34.0.0.0/15),(NETWORK,udp),(DST-PORT,50000-50100))
+      - AND,((IP-CIDR,34.2.0.0/15),(NETWORK,udp),(DST-PORT,50000-50100))
+      - AND,((IP-CIDR,35.192.0.0/12),(NETWORK,udp),(DST-PORT,50000-50100))
+      - AND,((IP-CIDR,35.208.0.0/12),(NETWORK,udp),(DST-PORT,50000-50100))
+      - AND,((IP-CIDR,5.200.14.128/25),(NETWORK,udp),(DST-PORT,50000-50100))
+      - AND,((IP-CIDR,66.22.192.0/18),(NETWORK,udp),(DST-PORT,50000-50100))
+    behavior: classical
+  cloudflare-ips:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cloudflare.mrs
+    path: ./rule-sets/cloudflare-ips.mrs
+    interval: 86400
+    proxy: 🌍 VPN
+  quic:
+    type: inline
+    behavior: classical
+    payload:
+      - AND,((NETWORK,udp),(DST-PORT,443))
+  telegram-ips:
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    proxy: 🌍 VPN
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs
+    path: ./rule-sets/telegram-ips.mrs
+  telegram-domains:
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    proxy: 🌍 VPN
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
+    path: ./rule-sets/telegram-domains.mrs
   cloudflare:
     <<: *rp_ipcidr
     url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geoip/cloudflare.mrs
@@ -789,6 +855,28 @@ rule-providers:
     <<: *rp_domain
     url: https://raw.githubusercontent.com/Davoyan/mihomo-rule-sets/main/rules/category-ru.mrs
     path: ./rule-sets/geosite-ru.mrs
+  geoip-private:
+    type: inline
+    payload:
+      - IP-CIDR,0.0.0.0/8
+      - IP-CIDR,10.0.0.0/8
+      - IP-CIDR,100.64.0.0/10
+      - IP-CIDR,127.0.0.0/8
+      - IP-CIDR,169.254.0.0/16
+      - IP-CIDR,172.16.0.0/12
+      - IP-CIDR,192.0.0.0/24
+      - IP-CIDR,192.0.2.0/24
+      - IP-CIDR,192.88.99.0/24
+      - IP-CIDR,192.168.0.0/16
+      - IP-CIDR,198.18.0.0/15
+      - IP-CIDR,198.51.100.0/24
+      - IP-CIDR,203.0.113.0/24
+      - IP-CIDR,224.0.0.0/3
+      - IP-CIDR,::/127
+      - IP-CIDR,fc00::/7
+      - IP-CIDR,fe80::/10
+      - IP-CIDR,ff00::/8
+    behavior: classical
   geoip-ru:
     <<: *rp_ipcidr
     url: https://github.com/MetaCubeX/meta-rules-dat/raw/meta/geo/geoip/ru.mrs
@@ -804,19 +892,39 @@ rule-providers:
       - DOMAIN,ip-api.com
 
 rules:
+  # DNS HIJACK
+  - DST-PORT,53,DNS-OUT
+    # Локальную сеть в директ
+  - RULE-SET,geoip-private,DIRECT,no-resolve
+  - RULE-SET,geosite-private,DIRECT
+  
   - PROCESS-PATH,C:\Program Files\WindowsApps\36690Nohus.RIFTIntelFusionTool_5.18.4.0_x64__y193x6xbg7nmg\bin\RIFT Intel Fusion Tool.exe,DIRECT
   - RULE-SET,apps_ipcheck,🌍 VPN
   - PROCESS-NAME,exefile.exe,🌍 VPN
-
+  
+  # Пускаем эти домены твича в директ, чтобы избавиться от рекламы (опционально)
+  - OR,((DOMAIN-SUFFIX,ads.twitch.tv),(DOMAIN-SUFFIX,playlist.ttvnw.net)),DIRECT
+  
   - RULE-SET,ads-all,REJECT
   - RULE-SET,ru-app-list,♻️ БезVPN
   - OR,((RULE-SET,torrent-clients),(RULE-SET,torrent-trackers)),♻️ БезVPN
   - RULE-SET,games-direct,♻️ БезVPN
   - RULE-SET,youtube,▶️ YouTube
+    # ➤ Telegram
+  - RULE-SET,telegram-ips,➤ Telegram
+  - RULE-SET,telegram-domains,➤ Telegram
+  - PROCESS-NAME-REGEX,(?i).*ayugram.*,➤ Telegram
+  - PROCESS-NAME-REGEX,(?i).*telegram.*,➤ Telegram
+    # 💬 Discord
+  - AND,((RULE-SET,cloudflare-ips),(NETWORK,udp),(DST-PORT,19200-19500)),💬 Discord
+  - AND,((RULE-SET,cloudflare-ips),(NETWORK,udp),(DST-PORT,50000-50100)),💬 Discord
+  - AND,((RULE-SET,discord_voiceips),(NETWORK,udp),(DST-PORT,50000-50100)),💬 Discord
+  - RULE-SET,discord_vc,💬 Discord
+  - RULE-SET,discord_domains,💬 Discord
+  - PROCESS-NAME-REGEX,(?i).*discord.*,💬 Discord
+  - PROCESS-NAME-REGEX,(?i).*vesktop.*,💬 Discord
   - OR,((RULE-SET,whatsapp_domains),(RULE-SET,meta_ips)),🌍 VPN
-  - OR,((RULE-SET,telegram_domains),(RULE-SET,telegram_ips)),🌍 VPN
-  - OR,((RULE-SET,discord_domains),(RULE-SET,discord_voiceips)),🌍 VPN
-  - OR,((PROCESS-NAME,Discord.exe),(PROCESS-NAME,org.cromite.cromite)),🌍 VPN
+
   - RULE-SET,ru-bundle,🌍 VPN
   - RULE-SET,cloudflare,🌍 VPN
   - RULE-SET,rknasnblock,🌍 VPN
