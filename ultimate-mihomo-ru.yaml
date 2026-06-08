@@ -889,7 +889,6 @@ rules:
   # --- Сервисы через PROXY ---
   - RULE-SET,google-play,PROXY
   - RULE-SET,twitch-ads,PROXY                      # домены Twitch Ads — через PROXY (фикс качества)
-  - RULE-SET,github,PROXY  
   
   # --- Сервисы в DIRECT ---
   - RULE-SET,twitch,DIRECT
