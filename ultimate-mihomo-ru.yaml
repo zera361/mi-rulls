@@ -902,8 +902,8 @@ rules:
   - RULE-SET,torrent-clients,DIRECT                # торрент-клиенты по процессу
   - RULE-SET,youtube,▶️ YouTube
     # ➤ Telegram
-  - RULE-SET,telegram-ips,➤ Telegram
-  - RULE-SET,telegram-domains,➤ Telegram
+  - RULE-SET,telegram,➤ Telegram
+
   - PROCESS-NAME-REGEX,(?i).*ayugram.*,➤ Telegram
   - PROCESS-NAME-REGEX,(?i).*telegram.*,➤ Telegram
     # 💬 Discord
