@@ -663,7 +663,7 @@ dns:
     rule-set:private-domains:
       - system
 
-    "rule-set:apps_ipcheck,youtube,telegram_domains,discord_domains,whatsapp_domains": *dns_proxy
+    "rule-set:youtube,telegram_domains,discord_domains,whatsapp_domains": *dns_proxy
 proxy-providers:
   subscription:
     type: inline
@@ -884,7 +884,6 @@ rules:
   - RULE-SET,torrent-domains,DIRECT                # торрент-трекеры — напрямую
   
   - PROCESS-PATH,C:\Program Files\WindowsApps\36690Nohus.RIFTIntelFusionTool_5.18.4.0_x64__y193x6xbg7nmg\bin\RIFT Intel Fusion Tool.exe,DIRECT
-  - RULE-SET,apps_ipcheck,PROXY
   - PROCESS-NAME,exefile.exe,PROXY
 
   # --- Сервисы через PROXY ---
