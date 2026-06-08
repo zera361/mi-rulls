@@ -28,7 +28,7 @@ x-anchors:
 
   dns_proxy: &dns_proxy
     - https://1.1.1.1/dns-query
-    - https://1.0.0.1/dns-query  #🌍 VPN
+    - https://1.0.0.1/dns-query  # PROXY
 
   pr_http: &pr_http
     type: http
@@ -38,19 +38,19 @@ x-anchors:
     <<: *pr_http
     behavior: classical
     format: yaml
-    proxy: 🌍 VPN
+    proxy: PROXY
 
   rp_domain: &rp_domain
     <<: *pr_http
     behavior: domain
     format: mrs
-    proxy: 🌍 VPN
+    proxy: PROXY
 
   rp_ipcidr: &rp_ipcidr
     <<: *pr_http
     behavior: ipcidr
     format: mrs
-    proxy: 🌍 VPN
+    proxy: PROXY
 
 mixed-port: 7890
 allow-lan: false
@@ -658,7 +658,7 @@ dns:
     - 77.88.8.1
   proxy-server-nameserver: *dns_ru
   direct-nameserver: *dns_ru
-  nameserver: *dns_proxy #🌍 VPN
+  nameserver: *dns_proxy # PROXY
   nameserver-policy:
     rule-set:private-domains:
       - system
