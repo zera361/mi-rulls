@@ -892,7 +892,6 @@ rules:
   
   # --- Сервисы в DIRECT ---
   - RULE-SET,twitch,DIRECT
-  - RULE-SET,microsoft,DIRECT
   - RULE-SET,apple,DIRECT
  
   # --- DIRECT ---
