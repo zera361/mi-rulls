@@ -663,7 +663,7 @@ dns:
     rule-set:private-domains:
       - system
 
-    "rule-set:youtube,ttelegram,discord_domains,whatsapp_domains": *dns_proxy
+    "rule-set:youtube,telegram,discord_domains,whatsapp_domains": *dns_proxy
 proxy-providers:
   subscription:
     type: inline
