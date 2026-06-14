@@ -956,7 +956,7 @@ rules:
 
   # --- IP-адреса → DIRECT ---
   - RULE-SET,direct-ips,DIRECT
-  - RULE-SET,asn_list,DIRECT
+  #- RULE-SET,asn_list,DIRECT
   
   # --- Всё остальное → PROXY ---
   - MATCH,PROXY 
