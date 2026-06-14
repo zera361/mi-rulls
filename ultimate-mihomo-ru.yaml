@@ -736,20 +736,26 @@ proxy-groups:
 
   - name: 💬 Discord
     icon: https://cdn.jsdelivr.net/gh/remnawave/templates@main/icons/Discord.png
-    type: select
+    type: fallback
+    url: https://captive.apple.com/generate_204
+    interval: 60
+    tolerance: 30
     proxies:
-      - ⚡️ Авто
       - 🤖 AI
+      - ⚡️ Авто
       - 🔓 Без VPN
     use:
       - subscription
 
   - name: ➤ Telegram
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Telegram.png
-    type: select
+    type: fallback
+    url: https://captive.apple.com/generate_204
+    interval: 60
+    tolerance: 30
     proxies:
-      - ⚡️ Авто
       - 🤖 AI
+      - ⚡️ Авто
       - 🔓 Без VPN
     use:
       - subscription
