@@ -82,9 +82,13 @@ sniffer:
       ports:
         - 443
         - 8443
+        - 9443
     QUIC:
       ports:
         - 443
+  skip-domain:
+    - "+.lan"
+    - "+.local"
   skip-dst-address:
     - 0.0.0.0/8
     - 10.0.0.0/8
