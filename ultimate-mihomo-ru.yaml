@@ -682,8 +682,12 @@ proxies: # LEAVE THIS LINE!
 proxy-groups:
   - name: 🛡️ VPN
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hijacking.png
-    type: select
+    type: fallback
+    url: https://captive.apple.com/generate_204
     exclude-filter: 🇷🇺 Rus-2
+    interval: 60
+    lazy: false
+    tolerance: 50 
     proxies:
       - ⚡️ Авто
       - 🤖 AI
