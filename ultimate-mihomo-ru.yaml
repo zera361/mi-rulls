@@ -686,6 +686,8 @@ proxy-groups:
     exclude-filter: 🇷🇺 Rus-2
     proxies:
       - ⚡️ Авто
+      - 🤖 AI
+      - 🔓 Без VPN
       # LEAVE THIS LINE!
     use:
       - subscription
@@ -693,12 +695,27 @@ proxy-groups:
   - name: ▶️ YouTube
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/YouTube.png
     type: select
+    include-all: true
     proxies:
-      - 🛡️ VPN
+      # LEAVE THIS LINE!
     use:
       - subscription
 
   - name: ⚡️ Авто
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
+    type: url-test
+    exclude-filter: 🇷🇺 Rus-2
+    url: https://captive.apple.com/generate_204
+    hidden: false
+    interval: 300
+    #include-all: true
+    proxies:
+      # LEAVE THIS LINE!
+    use:
+      - subscription
+
+  - name: 🤖 AI
+    icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Magic.png
     type: smart
     exclude-filter: 🇷🇺 Rus-2
     # uselightgbm: use LightGBM model predict weight
@@ -718,6 +735,7 @@ proxy-groups:
     type: select
     proxies:
       - ⚡️ Авто
+      - 🤖 AI
       - 🔓 Без VPN
     use:
       - subscription
@@ -727,6 +745,7 @@ proxy-groups:
     type: select
     proxies:
       - ⚡️ Авто
+      - 🤖 AI
       - 🔓 Без VPN
     use:
       - subscription
@@ -800,6 +819,10 @@ rule-providers:
     <<: *rp_domain
     url: https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geosite/release/mihomo/twitch-ads.mrs
     path: ./ruleset/twitch-ads.mrs
+  asn_list:
+    <<: *rp_classical
+    url: https://raw.githubusercontent.com/zera361/asn_list/refs/heads/main/list1.yaml
+    path: ./ruleset/asn_list.yaml
   direct-ips:
     <<: *rp_domain
     url: https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/direct.mrs
@@ -919,6 +942,7 @@ rules:
 
   # --- IP-адреса → DIRECT ---
   - RULE-SET,direct-ips,DIRECT
+  - RULE-SET,asn_list,DIRECT
   
   # --- Всё остальное → PROXY ---
   - MATCH,PROXY 
