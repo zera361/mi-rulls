@@ -34,7 +34,7 @@ x-anchors:
     type: http
     interval: 86400
 
-rp_classical: &rp_classical
+  rp_classical: &rp_classical
     type: http
     interval: 86400
     behavior: classical
