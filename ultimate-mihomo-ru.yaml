@@ -34,24 +34,26 @@ x-anchors:
     type: http
     interval: 86400
 
-  rp_classical: &rp_classical
-    <<: *pr_http
+rp_classical: &rp_classical
+    type: http
+    interval: 86400
     behavior: classical
     format: yaml
     proxy: PROXY
 
   rp_domain: &rp_domain
-    <<: *pr_http
+    type: http
+    interval: 86400
     behavior: domain
     format: mrs
     proxy: PROXY
 
   rp_ipcidr: &rp_ipcidr
-    <<: *pr_http
+    type: http
+    interval: 86400
     behavior: ipcidr
     format: mrs
     proxy: PROXY
-
 mixed-port: 7890
 allow-lan: false
 bind-address: "*"
