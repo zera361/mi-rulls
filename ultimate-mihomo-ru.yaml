@@ -677,7 +677,7 @@ proxy-providers:
       interval: 600
       url: https://captive.apple.com/generate_204
     payload:
-$payload$
+      $payload$
 
 proxies: # LEAVE THIS LINE!
 
