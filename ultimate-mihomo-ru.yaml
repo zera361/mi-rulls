@@ -806,7 +806,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geosite/release/mihomo/twitch.mrs
     path: ./ruleset/twitch.mrs
   private-ips:
-    <<: *rp_domain
+    <<: *rp_ipcidr 
     url: https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/private.mrs
     path: ./ruleset/geoip-private.mrs
   twitch-ads:
@@ -818,7 +818,7 @@ rule-providers:
     url: https://raw.githubusercontent.com/zera361/asn_list/refs/heads/main/list1.yaml
     path: ./ruleset/asn_list.yaml
   direct-ips:
-    <<: *rp_domain
+    <<: *rp_ipcidr 
     url: https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/direct.mrs
     path: ./ruleset/direct-ips.mrs
   category-ads:
