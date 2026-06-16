@@ -669,15 +669,27 @@ dns:
     "rule-set:youtube,telegram,discord_domains,whatsapp_domains": *dns_proxy
 proxy-providers:
   subscription:
-    type: inline
+    type: http
+    url: "$subscription_url$"
     path: ./proxy_providers/subscription.yaml
+    interval: $profile-update-interval$
     health-check:
       enable: true
       lazy: true
       interval: 600
       url: https://captive.apple.com/generate_204
-    payload:
-$payload$
+    proxy: DIRECT
+    header:
+      User-Agent:
+      - "$User-Agent$"
+      x-hwid:
+      - "$x-hwid$"
+      x-device-os:
+      - "$x-device-os$"
+      x-ver-os:
+      - "$x-ver-os$"
+      x-device-model:
+      - "$x-device-model$"
 
 proxies: # LEAVE THIS LINE!
 
