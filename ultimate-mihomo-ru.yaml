@@ -22,33 +22,33 @@ x-anchors:
     - 203.0.113.0/24
     - 224.0.0.0/3
 
-  dns_ru: &dns_ru
+dns_ru: &dns_ru
     - https://common.dot.dns.yandex.net
     - 77.88.8.1
 
-  dns_proxy: &dns_proxy
+dns_proxy: &dns_proxy
     - https://1.1.1.1/dns-query
     - https://1.0.0.1/dns-query  # PROXY
 
-  pr_http: &pr_http
+pr_http: &pr_http
     type: http
     interval: 86400
 
-  rp_classical: &rp_classical
+rp_classical: &rp_classical
     type: http
     interval: 86400
     behavior: classical
     format: yaml
     proxy: PROXY
 
-  rp_domain: &rp_domain
+rp_domain: &rp_domain
     type: http
     interval: 86400
     behavior: domain
     format: mrs
     proxy: PROXY
 
-  rp_ipcidr: &rp_ipcidr
+rp_ipcidr: &rp_ipcidr
     type: http
     interval: 86400
     behavior: ipcidr
