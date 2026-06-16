@@ -112,6 +112,29 @@ dns:
     "*.lan,*.local": [192.168.1.1, system]
     "rule-set:youtube,category-ban-ru,whatsapp_domains,telegram_domains,discord_domains": *dns_proxy
     "rule-set:geosite-ru": *dns_ru
+proxy-providers:
+  subscription:
+    type: http
+    url: "$subscription_url$"
+    path: ./proxy_providers/subscription.yaml
+    interval: $profile-update-interval$
+    health-check:
+      enable: true
+      lazy: true
+      interval: 600
+      url: https://captive.apple.com/generate_204
+    proxy: DIRECT
+    header:
+      User-Agent:
+      - "$User-Agent$"
+      x-hwid:
+      - "$x-hwid$"
+      x-device-os:
+      - "$x-device-os$"
+      x-ver-os:
+      - "$x-ver-os$"
+      x-device-model:
+      - "$x-device-model$"
 
 proxy-groups:
   - name: 🌍 VPN
