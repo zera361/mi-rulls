@@ -677,7 +677,7 @@ proxy-groups:
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Hijacking.png
     type: fallback
     url: https://captive.apple.com/generate_204
-    exclude-filter: 🇷🇺 Rus-2
+    exclude-filter: 🇷🇺  RU • YouTube Fix 📺
     interval: 60
     lazy: false
     tolerance: 50 
@@ -699,7 +699,7 @@ proxy-groups:
   - name: ⚡️ Авто
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Auto.png
     type: url-test
-    exclude-filter: 🇷🇺 Rus-2
+    exclude-filter: 🇷🇺  RU • YouTube Fix 📺
     url: https://captive.apple.com/generate_204
     hidden: false
     interval: 300
@@ -709,7 +709,7 @@ proxy-groups:
   - name: 🤖 AI
     icon: https://cdn.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/Magic.png
     type: smart
-    exclude-filter: 🇷🇺 Rus-2
+    exclude-filter: 🇷🇺  RU • YouTube Fix 📺
     hidden: false
     # uselightgbm: use LightGBM model predict weight
     uselightgbm: true
