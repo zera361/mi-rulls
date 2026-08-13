@@ -1,0 +1,46 @@
+name: 1. Сборка GeoData и правил
+
+on:
+  schedule:
+    - cron: '0 */12 * * *' # Автозапуск каждые 12 часов
+  workflow_dispatch: # Возможность ручного запуска
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Чеккаут кода
+        uses: actions/checkout@v4
+
+      - name: Настройка Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Настройка Protoc
+        uses: arduino/setup-protoc@v3
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Установка зависимостей
+        run: pip install protobuf
+
+      - name: Компиляция Protobuf
+        run: protoc --python_out=. tools/router.proto
+
+      - name: Запуск сборки .dat баз
+        run: python tools/builder.py config.json
+
+      - name: Запуск парсера в .yaml и .lst
+        run: python tools/parser.py
+
+      - name: Деплой сгенерированных правил в ветку lists
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: lists
+          folder: parser-tmp
+          clean: true
+          single-commit: true
