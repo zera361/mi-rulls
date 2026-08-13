@@ -1,0 +1,45 @@
+{
+  "geosite": [
+    {
+      "url": "https://github.com/hydraponique/roscomvpn-geosite/raw/release/geosite.dat",
+      "rules": [
+        { "src": ["roscomvpn", "youtube", "telegram", "discord"], "dst": "GEOGAGA-MAIN" }
+      ]
+    },
+    {
+      "url": "https://github.com/runetfreedom/russia-v2ray-rules-dat/raw/release/geosite.dat",
+      "rules": [
+        { "src": ["proxy"], "dst": "GEOGAGA-MAIN" },
+        { "src": ["direct"], "dst": "GEOGAGA-DIRECT" }
+      ]
+    },
+    {
+      "url": "https://github.com/Loyalsoldier/v2ray-rules-dat/raw/release/geosite.dat",
+      "rules": [
+        { "src": ["category-ads-all", "win-spy"], "dst": "GEOGAGA-BLOCK" },
+        { "src": ["cn"], "dst": "GEOGAGA-DIRECT" }
+      ]
+    }
+  ],
+  "geoip": [
+    {
+      "url": "https://github.com/hydraponique/roscomvpn-geoip/raw/release/geoip.dat",
+      "rules": [
+        { "src": ["roscomvpn", "telegram"], "dst": "GEOGAGA-MAIN" }
+      ]
+    },
+    {
+      "url": "https://github.com/runetfreedom/russia-v2ray-rules-dat/raw/release/geoip.dat",
+      "rules": [
+        { "src": ["proxy"], "dst": "GEOGAGA-MAIN" },
+        { "src": ["ru"], "dst": "GEOGAGA-DIRECT" }
+      ]
+    },
+    {
+      "url": "https://github.com/DanielLavrushin/b4geoip/releases/latest/download/geoip.dat",
+      "rules": [
+        { "src": ["telegram", "cloudflare"], "dst": "GEOGAGA-MAIN" }
+      ]
+    }
+  ]
+}
