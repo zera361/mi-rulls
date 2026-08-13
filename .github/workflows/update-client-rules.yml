@@ -1,0 +1,67 @@
+name: Convert GeoGaga DAT to Mihomo Rules
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4.2.2
+
+      - name: Download GeoGaga DAT files
+        run: |
+          rm -rf temp txt rules
+          mkdir -p temp rules txt
+          curl -fsSL -o temp/geosite.dat https://github.com/bratishkadrugoimamysynishka/geogaga-client-flavor/releases/latest/download/geosite.dat
+          curl -fsSL -o temp/geoip.dat https://github.com/bratishkadrugoimamysynishka/geogaga-client-flavor/releases/latest/download/geoip.dat
+
+      - name: Install v2dat
+        run: |
+          curl -fsSL -o v2dat https://github.com/returnyx/v2dat/releases/download/v20240712/v2dat_20240712_amd64
+          chmod +x v2dat
+
+      - name: Unpack DAT to TXT
+        run: |
+          ./v2dat unpack geosite -d ./txt -f geogaga-block temp/geosite.dat || true
+          ./v2dat unpack geosite -d ./txt -f geogaga-direct temp/geosite.dat || true
+          ./v2dat unpack geosite -d ./txt -f geogaga-proxy temp/geosite.dat || true
+          ./v2dat unpack geoip -d ./txt -f geogaga-block temp/geoip.dat || true
+          ./v2dat unpack geoip -d ./txt -f geogaga-direct temp/geoip.dat || true
+          ./v2dat unpack geoip -d ./txt -f geogaga-proxy temp/geoip.dat || true
+
+      - name: Convert TXT to Mihomo YAML
+        run: |
+          # Конвертируем все сгенерированные файлы geosite
+          for f in txt/geosite_*.txt; do
+            [ -f "$f" ] || continue
+            out="rules/$(basename "${f%.txt}").yaml"
+            echo "payload:" > "$out"
+            awk -F: '
+              $1=="domain" {print "  - DOMAIN-SUFFIX," $2}
+              $1=="full"   {print "  - DOMAIN," $2}
+              $1=="keyword"{print "  - DOMAIN-KEYWORD," $2}
+              $1=="regexp" {print "  - DOMAIN-REGEX," $2}
+              ND==1 && $0!~/:/ {print "  - DOMAIN-SUFFIX," $0}
+            ' "$f" >> "$out"
+          done
+
+          # Конвертируем все сгенерированные файлы geoip
+          for f in txt/geoip_*.txt; do
+            [ -f "$f" ] || continue
+            out="rules/$(basename "${f%.txt}").yaml"
+            echo "payload:" > "$out"
+            awk '{print "  - IP-CIDR," $0 ",no-resolve"}' "$f" >> "$out"
+          done
+
+      - name: Auto Commit & Push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-update GeoGaga rules [skip ci]"
+          file_pattern: 'rules/*.yaml'
