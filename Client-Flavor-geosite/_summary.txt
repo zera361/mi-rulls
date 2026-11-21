@@ -1,0 +1,8 @@
+=== СВОДКА: Client-Flavor-geosite ===
+Всего категорий: 3
+Всего элементов: 311707
+
+Детализация по категориям:
+- GEOGAGA-MAIN: 203 элементов (domain: 203)
+- GEOGAGA-BLOCK: 201404 элементов (domain: 201404)
+- GEOGAGA-DIRECT: 110100 элементов (regex: 8, domain: 109688, full: 404)
